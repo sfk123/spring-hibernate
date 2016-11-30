@@ -13,7 +13,7 @@ public class BookShopServiceImpl implements BookShopService{
 	@Override
 	public void purchase(String username, String isbn) {
 		int price=bookShopDao.findBookPriceByIsbn(isbn);
-		System.out.println("Õº Èº€∏Ò£∫"+price);
+		System.out.println("‰ª∑Ê†º:"+price);
 		bookShopDao.updateBookStock(isbn);
 		bookShopDao.updateUserAccount(username, price);
 		

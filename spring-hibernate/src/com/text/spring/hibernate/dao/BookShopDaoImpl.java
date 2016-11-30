@@ -18,24 +18,27 @@ public class BookShopDaoImpl implements BookShopDao{
 	@Override
 	public int findBookPriceByIsbn(String isbn) {
 		String hql="select price from Book where isbn=?";
-		Query query=getSession().createQuery(hql).setString(0, isbn);		
-		return (Integer)query.uniqueResult();
+		Query query=getSession().createQuery(hql).setString(0, isbn);
+		Object result=query.uniqueResult();
+		if(result==null)
+			return 0;
+		return (Integer)result;
 	}
 
 	@Override
 	public void updateBookStock(String isbn) {
 		String hql2="select b.stock from Book b where b.isbn=?";
 		int stock=(int)getSession().createQuery(hql2).setString(0, isbn).uniqueResult();
-		System.out.println("¿â´æ:"+stock);
+		System.out.println("åº“å­˜:"+stock);
 		if(stock==0){
-			//¿â´æ²»×ã
-			System.out.println("¿â´æ²»×ã");
-			throw new BookStockeException("¿â´æ²»×ã");
+			//åº“å­˜ä¸è¶³
+			System.out.println("åº“å­˜ä¸è¶³");
+			throw new BookStockeException("åº“å­˜ä¸è¶³");
 			
 		}
 		String hql="update Book b set b.stock=b.stock-1 where b.isbn=?";
 		getSession().createQuery(hql).setString(0, isbn).executeUpdate();
-		System.out.println("¸üĞÂ¿â´æÍê³É");
+		System.out.println("æ›´æ–°åº“å­˜å®Œæˆ");
 	}
 
 	@Override
@@ -43,9 +46,9 @@ public class BookShopDaoImpl implements BookShopDao{
 		String hql2="select a.balance from Account a where a.userName=?";
 		int balance=(int)getSession().createQuery(hql2).setString(0, username).uniqueResult();
 		if(balance<price){
-			//Óà¶î²»×ã
-			System.out.println("Óà¶î²»×ã");
-			throw new UserAccountException("Óà¶î²»×ã");
+			//ä½™é¢ä¸è¶³
+			System.out.println("ä½™é¢ä¸è¶³");
+			throw new UserAccountException("ä½™é¢ä¸è¶³");
 		}
 		String hql="update Account a set a.balance=a.balance-? where a.userName=?";
 		getSession().createQuery(hql).setInteger(0, price).setString(1, username).executeUpdate();
