@@ -11,7 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Book {
 	private Integer id;
 	private String bookName;
-	private String isbn;
+	private String store;
 	private int price;
 	private int stock;
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +29,6 @@ public class Book {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-	public String getIsbn() {
-		return isbn;
-	}
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
 	public int getPrice() {
 		return price;
 	}
@@ -46,6 +40,12 @@ public class Book {
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+	public String getStore() {
+		return store;
+	}
+	public void setStore(String store) {
+		this.store = store;
 	}
 	
 }

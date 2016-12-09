@@ -5,7 +5,7 @@
   <groupId>com.sheng.example</groupId>
   <artifactId>spring-hibernate</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <properties>
   	<argLine>-Dfile.encoding=UTF-8</argLine>  
     <hibernate.version>5.1.0.Final</hibernate.version>
@@ -57,9 +57,9 @@
 	    <scope>provided</scope>
 	</dependency>
 	<dependency>
-	    <groupId>com.mchange</groupId>
-	    <artifactId>c3p0</artifactId>
-	    <version>0.9.5.2</version>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>druid</artifactId>
+	    <version>1.0.26</version>
 	</dependency>
 	<dependency>
        <groupId>org.hibernate</groupId>

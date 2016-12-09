@@ -1,10 +1,14 @@
 package com.sheng.example.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.sheng.example.entities.Book;
 
 @Repository
 public class BookShopDaoImpl implements BookShopDao{
@@ -55,6 +59,24 @@ public class BookShopDaoImpl implements BookShopDao{
 		}
 		String hql="update Account a set a.balance=a.balance-? where a.userName=?";
 		getSession().createQuery(hql).setInteger(0, price).setString(1, username).executeUpdate();
+	}
+	@Override
+	public List<Book> getBooks() {
+		String hql="from Book";
+		Query query=getSession().createQuery(hql);
+		return query.list();
+	}
+	@Override
+	public Book getById(int id) {
+		String hql="from Book where id=(:id)";
+		Query query=getSession().createQuery(hql).setParameter("id", id);
+		
+		return (Book)query.uniqueResult();
+	}
+	@Override
+	public void updateBook(Book book) {
+		getSession().update(book);
+		getSession().flush();
 	}
 
 }
